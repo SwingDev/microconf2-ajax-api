@@ -1,0 +1,19 @@
+{
+    "extends": ["tslint-microsoft-contrib"],
+    "rules": {
+        "export-name": false,
+        "missing-jsdoc": false,
+        "completed-docs": false,
+        "no-any": false,
+        "no-backbone-get-set-outside-model": false,
+        "no-empty-interface": false,
+        "no-import-side-effect": false,
+        "no-multiline-string": false,
+        "no-non-null-assertion": false,
+        "no-parameter-properties": false,
+        "no-relative-imports": false,
+        "no-reference": false,
+        "max-classes-per-file": [true, 10],
+        "mocha-no-side-effect-code": false
+    }
+}

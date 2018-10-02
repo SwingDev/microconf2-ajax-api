@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "lib": ["es2017", "dom"],
+    "module": "commonjs",
+    "outDir": "./build",
+    "strict": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "rootDir": "./src",
+    "baseUrl": "./src"
+  },
+  "exclude": [
+    "build",
+    "node_modules"
+  ]
+}

@@ -1,0 +1,10 @@
+.git
+
+.dockerignore
+.gitignore
+Dockerfile
+Makefile
+
+build
+coverage
+node_modules
