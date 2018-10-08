@@ -1,3 +1,4 @@
+import { HelmetMiddleware } from '@nest-middlewares/helmet';
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 
 import { CrimesModule } from './crimes/crimes.module';
@@ -12,8 +13,10 @@ import { RealLifeLatencyMiddleware } from './real-life/real-life-latency.middlew
 // tslint:disable-next-line:no-unnecessary-class
 export class AppModule {
   public configure(consumer: MiddlewareConsumer): void {
+    HelmetMiddleware.configure({});
+
     consumer
-      .apply(RealLifeLatencyMiddleware, RealLifeErrorsMiddleware)
+      .apply(HelmetMiddleware, RealLifeLatencyMiddleware, RealLifeErrorsMiddleware)
       .forRoutes({ path: '*', method: RequestMethod.ALL });
   }
 }
