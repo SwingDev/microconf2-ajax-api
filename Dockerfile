@@ -29,7 +29,7 @@ RUN cd /tmp && \
 WORKDIR /app
 
 COPY . /app/
-RUN yarn prestart:prod
+RUN yarn build:prod
 
 USER node
 
