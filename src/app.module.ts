@@ -13,7 +13,9 @@ import { RealLifeLatencyMiddleware } from './real-life/real-life-latency.middlew
 // tslint:disable-next-line:no-unnecessary-class
 export class AppModule {
   public configure(consumer: MiddlewareConsumer): void {
-    HelmetMiddleware.configure({});
+    HelmetMiddleware.configure({
+      noCache: true
+    });
 
     consumer
       .apply(HelmetMiddleware, RealLifeLatencyMiddleware, RealLifeErrorsMiddleware)
