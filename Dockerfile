@@ -33,5 +33,5 @@ RUN yarn build:prod
 
 USER node
 
-ENTRYPOINT ["/sbin/tini", "--", "/app/docker-entrypoint.sh"]
+ENTRYPOINT ["/sbin/tini", "-s", "--", "/app/docker-entrypoint.sh"]
 CMD ["yarn", "start:prod"]

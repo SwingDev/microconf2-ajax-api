@@ -24,7 +24,7 @@ export class StaticJSONDBService {
   }
 
   private cloneDBFromSeed(): IStaticJsonDB {
-    const jsonPath: string = path.resolve(__dirname, './fixtures/seed.json');
+    const jsonPath: string = path.resolve(__dirname, '../../fixtures/seed.json');
 
     return <IStaticJsonDB>JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
   }
