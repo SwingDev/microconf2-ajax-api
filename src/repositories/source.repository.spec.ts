@@ -3,41 +3,55 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { IStaticJsonDB } from '../static-json-db/interfaces/db.interface';
 import { StaticJSONDBService } from '../static-json-db/static-json-db.service';
 import { InstanceNotFoundException } from './exceptions/instance-not-found.exception';
-import { SuspectRepository } from './suspect.repository';
+import { SourceRepository } from './source.repository';
 
 const mockDataFactory: () => IStaticJsonDB = (): IStaticJsonDB => {
   return {
-    region: [
-      { id: '1', name: 'Bemowo', pop: 120449 },
-      { id: '2', name: 'Białołęka', pop: 116127 }
+    tag: [
+      { id: '1', name: 'pugs' },
+      { id: '2', name: 'cats' }
     ],
-    crime: [
-      { id: '1', priority: null, description: 'Aggravated harassment of an employee by an inmate', suspectId: '1', regionId: '1' },
-      { id: '2', priority: null, description: 'Unlawful assembly', suspectId: '2', regionId: '2' }
+    gif: [
+      {
+        id: '1',
+        vote: null,
+        image: 'https://media1.giphy.com/media/gzKRbHzioNmzS/200w_s.gif',
+        video: 'https://media1.giphy.com/media/gzKRbHzioNmzS/200w.mp4',
+        sourceId: '1',
+        tagId: '1'
+      },
+      {
+        id: '2',
+        vote: null,
+        image: 'https://media1.giphy.com/media/f14rKleOPyTdu/200w_s.gif',
+        video: 'https://media1.giphy.com/media/f14rKleOPyTdu/200w.mp4',
+        sourceId: '1',
+        tagId: '2'
+      }
     ],
-    suspect: [
-      { id: '1', name: 'Violet Bouton' },
-      { id: '2', name: 'Marjory Gengler' }
+    source: [
+      { id: '1', name: 'Violet Bouton', tld: 'reddit.com' },
+      { id: '2', name: 'Marjory Gengler', tld: 'reddit.com' }
     ]
   };
 };
 
-describe('SuspectRepository', () => {
+describe('SourceRepository', () => {
   let app: TestingModule;
-  let suspectRepository: SuspectRepository;
+  let sourceRepository: SourceRepository;
   let staticJSONDBService: StaticJSONDBService;
 
   beforeEach(async () => {
     staticJSONDBService = new StaticJSONDBService();
     app = await Test.createTestingModule({
       providers: [
-        SuspectRepository,
+        SourceRepository,
         StaticJSONDBService
       ]
     }).compile();
 
     staticJSONDBService = app.get(StaticJSONDBService);
-    suspectRepository = app.get<SuspectRepository>(SuspectRepository);
+    sourceRepository = app.get<SourceRepository>(SourceRepository);
   });
 
   beforeEach(async () => {
@@ -49,7 +63,7 @@ describe('SuspectRepository', () => {
     it('should pass the right userId to StaticJSONDBService.getDBForUser', async () => {
       const getSpy: jest.SpyInstance<(userId: string) => IStaticJsonDB> = jest.spyOn(staticJSONDBService, 'getDBForUser');
 
-      await suspectRepository.getByIdForUser('a', '1');
+      await sourceRepository.getByIdForUser('a', '1');
 
       getSpy.mock.calls.forEach((args: any[][]) => {
         expect(args[0]).toBe('a');
@@ -57,13 +71,13 @@ describe('SuspectRepository', () => {
     });
 
     it('should return by id', async () => {
-      expect(await suspectRepository.getByIdForUser('a', '2')).toEqual(
-        { id: '2', name: 'Marjory Gengler' }
+      expect(await sourceRepository.getByIdForUser('a', '2')).toEqual(
+        { id: '2', name: 'Marjory Gengler', tld: 'reddit.com' }
       );
     });
 
     it('should throw if not found', async () => {
-      await expect(suspectRepository.getByIdForUser('a', 'notfound')).rejects.toBeInstanceOf(InstanceNotFoundException);
+      await expect(sourceRepository.getByIdForUser('a', 'notfound')).rejects.toBeInstanceOf(InstanceNotFoundException);
     });
   });
 
@@ -71,7 +85,7 @@ describe('SuspectRepository', () => {
     it('should pass the right userId to StaticJSONDBService.getDBForUser', async () => {
       const getSpy: jest.SpyInstance<(userId: string) => IStaticJsonDB> = jest.spyOn(staticJSONDBService, 'getDBForUser');
 
-      await suspectRepository.getByIdsForUser('a', ['1', '2']);
+      await sourceRepository.getByIdsForUser('a', ['1', '2']);
 
       getSpy.mock.calls.forEach((args: any[][]) => {
         expect(args[0]).toBe('a');
@@ -79,16 +93,16 @@ describe('SuspectRepository', () => {
     });
 
     it('should return by ids', async () => {
-      expect(await suspectRepository.getByIdsForUser('a', ['1', '2'])).toEqual([
-        { id: '1', name: 'Violet Bouton' },
-        { id: '2', name: 'Marjory Gengler' }
+      expect(await sourceRepository.getByIdsForUser('a', ['1', '2'])).toEqual([
+        { id: '1', name: 'Violet Bouton', tld: 'reddit.com' },
+        { id: '2', name: 'Marjory Gengler', tld: 'reddit.com' }
       ]);
     });
 
     it('should omit those that do not exist', async () => {
-      expect(await suspectRepository.getByIdsForUser('a', ['1', '2', '3'])).toEqual([
-        { id: '1', name: 'Violet Bouton' },
-        { id: '2', name: 'Marjory Gengler' }
+      expect(await sourceRepository.getByIdsForUser('a', ['1', '2', '3'])).toEqual([
+        { id: '1', name: 'Violet Bouton', tld: 'reddit.com' },
+        { id: '2', name: 'Marjory Gengler', tld: 'reddit.com' }
       ]);
     });
   });

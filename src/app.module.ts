@@ -1,12 +1,12 @@
 import { HelmetMiddleware } from '@nest-middlewares/helmet';
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 
-import { CrimesModule } from './crimes/crimes.module';
+import { GifsModule } from './gifs/gifs.module';
 import { RealLifeErrorsMiddleware } from './real-life/real-life-errors.middleware';
 import { RealLifeLatencyMiddleware } from './real-life/real-life-latency.middleware';
 
 @Module({
-  imports: [CrimesModule],
+  imports: [GifsModule],
   controllers: [],
   providers: []
 })

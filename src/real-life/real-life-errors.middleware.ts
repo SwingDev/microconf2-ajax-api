@@ -8,7 +8,9 @@ export class RealLifeErrorsMiddleware implements NestMiddleware {
   public resolve(...args: any[]): MiddlewareFunction {
     return (req?: express.Request, res?: express.Response, next?: Function): void => {
       if (this.shouldGenerateError()) {
-        return this.returnError(res!);
+        this.returnError(res!);
+
+        return;
       }
 
       next!();

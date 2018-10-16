@@ -5,9 +5,9 @@ import * as express from 'express';
 
 @Injectable()
 export class RealLifeLatencyMiddleware implements NestMiddleware {
-  public resolve(...args: any[]): MiddlewareFunction {
+  public resolve(...args: unknown[]): MiddlewareFunction {
     return (req?: express.Request, res?: express.Response, next?: Function): void => {
-      setTimeout(next!, this.requestLatencyInMs());
+      setTimeout(() => next!(), this.requestLatencyInMs());
     };
   }
 

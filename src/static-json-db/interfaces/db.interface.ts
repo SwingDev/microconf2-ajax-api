@@ -1,9 +1,9 @@
-import { IStaticJsonCrime } from './crime.interface';
-import { IStaticJsonRegion } from './region.interface';
-import { IStaticJsonSuspect } from './suspect.interface';
+import { IStaticJsonGif } from './gif.interface';
+import { IStaticJsonSource } from './source.interface';
+import { IStaticJsonTag } from './tag.interface';
 
 export interface IStaticJsonDB {
-  crime: IStaticJsonCrime[];
-  region: IStaticJsonRegion[];
-  suspect: IStaticJsonSuspect[];
+  gif: IStaticJsonGif[];
+  tag: IStaticJsonTag[];
+  source: IStaticJsonSource[];
 }

@@ -21,107 +21,107 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/region (GET)', (done: any) => {
+  it('/tag (GET)', (done: jest.DoneCallback) => {
     return request(app.getHttpServer())
-      .get('/region')
+      .get('/tag')
       .expect(200)
       .end(done);
   });
 
-  it('/region/676a82c2-6310-4aec-bc45-32473979faf5 (GET)', (done: any) => {
+  it('/tag/4e06bc60-511f-4929-af1b-7c2cc0983de3 (GET)', (done: jest.DoneCallback) => {
     return request(app.getHttpServer())
-      .get('/region/676a82c2-6310-4aec-bc45-32473979faf5')
+      .get('/tag/4e06bc60-511f-4929-af1b-7c2cc0983de3')
       .expect(200)
       .end(done);
   });
 
-  it('/region/blabla (GET 404)', (done: any) => {
+  it('/tag/blabla (GET 404)', (done: jest.DoneCallback) => {
     return request(app.getHttpServer())
-      .get('/region/blabla')
+      .get('/tag/blabla')
       .expect(404)
       .end(done);
   });
 
-  it('/suspect/1404f415-ac46-47e0-92bf-4b68a71cb760 (GET)', (done: any) => {
+  it('/source/91ed6c35-8df6-48d2-aee0-c8631ffd3eb9 (GET)', (done: jest.DoneCallback) => {
     return request(app.getHttpServer())
-      .get('/suspect/1404f415-ac46-47e0-92bf-4b68a71cb760')
+      .get('/source/91ed6c35-8df6-48d2-aee0-c8631ffd3eb9')
       .expect(200)
       .end(done);
   });
 
-  it('/suspect?ids=1404f415-ac46-47e0-92bf-4b68a71cb760&ids=3047ef8e-ca2c-4391-9f3d-04e7eb9a3191 (GET)', (done: any) => {
+  it('/source?ids=91ed6c35-8df6-48d2-aee0-c8631ffd3eb9&ids=28873988-d669-4fd2-aa28-fdf3820e447d (GET)', (done: jest.DoneCallback) => {
     return request(app.getHttpServer())
-      .get('/suspect')
+      .get('/source')
       .query({
-        ids: ['1404f415-ac46-47e0-92bf-4b68a71cb760', '3047ef8e-ca2c-4391-9f3d-04e7eb9a3191']
+        ids: ['91ed6c35-8df6-48d2-aee0-c8631ffd3eb9', '28873988-d669-4fd2-aa28-fdf3820e447d']
       })
       .expect(200)
       .end(done);
   });
 
-  it('/suspect/blabla (GET 404)', (done: any) => {
+  it('/source/blabla (GET 404)', (done: jest.DoneCallback) => {
     return request(app.getHttpServer())
-      .get('/suspect/blabla')
+      .get('/source/blabla')
       .expect(404)
       .end(done);
   });
 
-  it('/crime/bd7a95fe-725e-40ca-846b-e06ca7a5002d (GET)', (done: any) => {
+  it('/gif/5b694fbe-4ea7-43f7-8eef-5544b1694797 (GET)', (done: jest.DoneCallback) => {
     return request(app.getHttpServer())
-      .get('/crime/bd7a95fe-725e-40ca-846b-e06ca7a5002d')
+      .get('/gif/5b694fbe-4ea7-43f7-8eef-5544b1694797')
       .expect(200)
-      .expect('{"id":"bd7a95fe-725e-40ca-846b-e06ca7a5002d","priority":null,"description":"Receiving reward for official misconduct in the second degree","suspectId":"ff84d76c-d1bf-48b6-a820-20f524046324","regionId":"d23ce64a-b2d3-4094-8155-2429d5ae7c8e"}')
+      .expect('{"vote":null,"image":"https://media1.giphy.com/media/gzKRbHzioNmzS/200w_s.gif","video":"https://media1.giphy.com/media/gzKRbHzioNmzS/200w.mp4","id":"5b694fbe-4ea7-43f7-8eef-5544b1694797","sourceId":"559304ae-c14e-4302-b097-c85058d48e12","tagId":"4e06bc60-511f-4929-af1b-7c2cc0983de3"}')
       .end(done);
   });
 
-  it('/crime?ids=bd7a95fe-725e-40ca-846b-e06ca7a5002d&ids=95bce6da-414b-4dd0-96e6-cdbf9ea90943 (GET)', (done: any) => {
+  it('/gif?ids=5b694fbe-4ea7-43f7-8eef-5544b1694797&ids=f0f6a897-972b-44c8-9c46-1d24df345576 (GET)', (done: jest.DoneCallback) => {
     return request(app.getHttpServer())
-      .get('/crime')
+      .get('/gif')
       .query({
-        ids: ['bd7a95fe-725e-40ca-846b-e06ca7a5002d', '95bce6da-414b-4dd0-96e6-cdbf9ea90943']
+        ids: ['5b694fbe-4ea7-43f7-8eef-5544b1694797', 'f0f6a897-972b-44c8-9c46-1d24df345576']
       })
       .expect(200)
       .end(done);
   });
 
-  it('/crime/blabla (GET 404)', (done: any) => {
+  it('/gif/blabla (GET 404)', (done: jest.DoneCallback) => {
     return request(app.getHttpServer())
-      .get('/crime/blabla')
+      .get('/gif/blabla')
       .expect(404)
       .end(done);
   });
 
-  it('/crime/bd7a95fe-725e-40ca-846b-e06ca7a5002d (PATCH)', (done: any) => {
+  it('/gif/5b694fbe-4ea7-43f7-8eef-5544b1694797 (PATCH)', (done: jest.DoneCallback) => {
     return request(app.getHttpServer())
-      .patch('/crime/bd7a95fe-725e-40ca-846b-e06ca7a5002d')
+      .patch('/gif/5b694fbe-4ea7-43f7-8eef-5544b1694797')
       .send({
-        priority: 3
+        vote: 3
       })
       .expect(200)
-      .expect('{"id":"bd7a95fe-725e-40ca-846b-e06ca7a5002d","priority":3,"description":"Receiving reward for official misconduct in the second degree","suspectId":"ff84d76c-d1bf-48b6-a820-20f524046324","regionId":"d23ce64a-b2d3-4094-8155-2429d5ae7c8e"}')
+      .expect('{"vote":3,"image":"https://media1.giphy.com/media/gzKRbHzioNmzS/200w_s.gif","video":"https://media1.giphy.com/media/gzKRbHzioNmzS/200w.mp4","id":"5b694fbe-4ea7-43f7-8eef-5544b1694797","sourceId":"559304ae-c14e-4302-b097-c85058d48e12","tagId":"4e06bc60-511f-4929-af1b-7c2cc0983de3"}')
       .end(done);
   });
 
-  it('/crime/bd7a95fe-725e-40ca-846b-e06ca7a5002d (PATCH 400)', (done: any) => {
+  it('/gif/5b694fbe-4ea7-43f7-8eef-5544b1694797 (PATCH 400)', (done: jest.DoneCallback) => {
     return request(app.getHttpServer())
-      .patch('/crime/bd7a95fe-725e-40ca-846b-e06ca7a5002d')
+      .patch('/gif/5b694fbe-4ea7-43f7-8eef-5544b1694797')
       .send({
-        priority: '10'
+        vote: '10'
       })
       .expect(400)
       .end(done);
   });
 
-  it('/crime/bd7a95fe-725e-40ca-846b-e06ca7a5002d (DELETE)', (done: any) => {
+  it('/gif/5b694fbe-4ea7-43f7-8eef-5544b1694797 (DELETE)', (done: jest.DoneCallback) => {
     return request(app.getHttpServer())
-      .delete('/crime/bd7a95fe-725e-40ca-846b-e06ca7a5002d')
+      .delete('/gif/5b694fbe-4ea7-43f7-8eef-5544b1694797')
       .expect(200)
       .end(done);
   });
 
-  it('/crime/bd7a95fe-725e-40ca-846b-e06ca7a5002d (DELETE REPEATEDLY 404)', (done: any) => {
+  it('/gif/5b694fbe-4ea7-43f7-8eef-5544b1694797 (DELETE REPEATEDLY 404)', (done: jest.DoneCallback) => {
     return request(app.getHttpServer())
-      .delete('/crime/bd7a95fe-725e-40ca-846b-e06ca7a5002d')
+      .delete('/gif/5b694fbe-4ea7-43f7-8eef-5544b1694797')
       .expect(404)
       .end(done);
   });

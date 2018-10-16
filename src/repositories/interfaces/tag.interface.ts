@@ -1,4 +1,4 @@
-export interface ISuspectDTO {
+export interface ITagDTO {
   id: string;
   name: string;
 }
